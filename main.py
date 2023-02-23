@@ -16,8 +16,10 @@ bobber_night_1 = cv2.imread(os.path.join(
 bobber_night_2 = cv2.imread(os.path.join(
     "needle_image", "bobber_night_2.png"), cv2.IMREAD_UNCHANGED)
 
-needle_image = bobber_day_2
+needle_image = bobber_day_1
+
 window_name = "Minecraft 1.19.3 - Singleplayer"
+confdence = 0.7
 
 
 def get_window_names():
@@ -97,7 +99,16 @@ def main():
 
         screenshot = capture_window(get_window_handles(window_name)[0])
         result = cv2.matchTemplate(
-            screenshot, needle_image, cv2.TM_CCOEFF_NORMED)
+            screenshot, needle_image, cv2.TM_CCORR_NORMED)
+
+        result_properties = cv2.minMaxLoc(result)
+        min_value = result_properties[0]  # blackest pixle (0.0)
+        max_value = result_properties[1]  # whietes pixle (1.0)
+        min_location = result_properties[2]  # location of min_value (top left)
+        max_location = result_properties[3]  # location of max_value (top left)
+
+        if max_value >= confdence:
+            cv2.rectangle(screenshot, (max_location[0] + 20, max_location[1] + 20), (max_location[0] -20 + needle_image.shape[0], max_location[1] - 20 + needle_image.shape[1]), (0, 255, 0), 2)
 
         cv2.imshow("Computer Vision Screenshot", screenshot)
         cv2.imshow("Computer vision Result", result)
