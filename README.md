@@ -1,3 +1,3 @@
-# Computer Vision Test
+# Minecraft Fishing Bot
 
 Work In Progress
