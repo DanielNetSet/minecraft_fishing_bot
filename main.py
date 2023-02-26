@@ -9,9 +9,8 @@ import win32gui
 from pynput.mouse import Button, Controller
 import win32ui
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
-window_name = "Minecraft 1.19.3 - Singleplayer"
+phrase = "fishing bobber splashes"
+pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
 
 
 def get_window_names():
@@ -26,11 +25,11 @@ def get_window_names():
     return [string for string in window_names if string != ""]
 
 
-def get_window_handles(window_name):
+def get_window_handles():
     window_handles = []
 
     def winEnumHandler(window_handle, ctx):
-        if (win32gui.IsWindowVisible(window_handle) and win32gui.GetWindowText(window_handle) == window_name):
+        if (win32gui.IsWindowVisible(window_handle) and win32gui.GetWindowText(window_handle)[0:9] == "Minecraft"):
             window_handles.append(window_handle)
 
     win32gui.EnumWindows(winEnumHandler, None)
@@ -80,31 +79,35 @@ def capture_window(window_handle):
 
 
 def main():
-    previous_time = time.time()
+    # previous_time = time.time()
 
     while True:
-        delta_time = time.time() - previous_time
-        previous_time = time.time()
+        # delta_time = time.time() - previous_time
+        # previous_time = time.time()
 
-        if delta_time != 0:
-            print(f"FPS: {1 / delta_time}")
+        # if delta_time != 0:
+        #     print(f"FPS: {1 / delta_time}")
 
-        if len(get_window_handles(window_name)) == 0:
+        if len(get_window_handles()) == 0:
             print("error: no windows not found")
             break
 
-        screenshot = capture_window(get_window_handles(window_name)[0])
+        screenshot = cv2.cvtColor(capture_window(
+            get_window_handles()[0]), cv2.COLOR_BGR2GRAY)
 
-        text = pytesseract.image_to_string(cv2.threshold(cv2.cvtColor(
-            screenshot, cv2.COLOR_BGR2GRAY), 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1])
+        text = pytesseract.image_to_string(cv2.threshold(
+            screenshot, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1])
 
-        if "fishing bobber splashes" in text.lower():
-            print('---------------------- FOUND TEXT')
+        if phrase in text.lower():
+            print("FISH ON!!!")
             Controller().click(Button.right)
-            time.sleep(1.4)
+            print("bobber retrieved")
+            time.sleep(0.5)
             Controller().click(Button.right)
+            print("bobbern thrown")
+            time.sleep(4)
 
-        cv2.imshow("Computer Vision Screenshot", screenshot)
+        cv2.imshow("Computer Vision", screenshot)
 
         if cv2.waitKey(1) == ord("q"):
             cv2.destroyAllWindows()
