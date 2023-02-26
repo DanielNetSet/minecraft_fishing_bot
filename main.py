@@ -5,7 +5,7 @@ import pytesseract
 import numpy
 import win32con
 import win32gui
-from pynput.mouse import Button, Controller
+import pynput
 import win32ui
 
 phrase = "fishing bobber splashes"
@@ -85,7 +85,7 @@ def main():
         # previous_time = time.time()
 
         # if delta_time != 0:
-        #     print(f"FPS: {1 / delta_time}")
+        #     print(f"fps: {1 / delta_time}")
 
         if len(get_window_handles()) == 0:
             print("error: no windows not found")
@@ -98,11 +98,11 @@ def main():
             screenshot, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1])
 
         if phrase in text.lower():
-            print("FISH ON!!!")
-            Controller().click(Button.right)
+            print("fish on")
+            pynput.mouse.Controller().click(pynput.mouse.Button.right)
             print("bobber retrieved")
             time.sleep(0.5)
-            Controller().click(Button.right)
+            pynput.mouse.Controller().click(pynput.mouse.Button.right)
             print("bobbern thrown")
             time.sleep(4)
 

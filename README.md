@@ -20,6 +20,10 @@ Install the necessary dependencies.
 pip install -r requirements.txt
 ```
 
+### How To Use
+
+Just run `main.py` and have it running in the background.
+
 ### Things To Note
 
 Subtitles need to be turned on for it to work.
@@ -29,5 +33,7 @@ It dosent work in full screen.
 Set keyboard focus on the computer vision window and press "q" to quit.
 
 It is buggy when multiple people are fishing in the same spot.
+
+Make sure you don't have Minecraft minimised when you start the script.
 
 It is still a work in progress.
