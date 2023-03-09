@@ -6,6 +6,10 @@ A bot that can automatualy fish in Minecraft.
 
 ## Instructions
 
+### Python Version
+
+This project was developed using Python 3.10.10.
+
 ### Install Tesseract
 
 The fishing bot depends on Tesseract, which is an optical character recognition (OCR) engine that is used to convert scanned images of machine-printed and handwritten text into digital text. You can find the latest version [here](https://github.com/UB-Mannheim/tesseract/wiki).
@@ -32,8 +36,6 @@ It dosent work in full screen.
 
 Set keyboard focus on the computer vision window and press "q" to quit.
 
-It is buggy when multiple people are fishing in the same spot.
+It messes up when multiple people are fishing in the same spot because it reads other subtitles.
 
 Make sure you don't have Minecraft minimised when you start the script.
-
-It is still a work in progress.
