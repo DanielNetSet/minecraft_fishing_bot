@@ -1,6 +1,6 @@
 # Minecraft Fishing Bot
 
-A bot that can automatualy fish in Minecraft.
+A bot that can automatically fish in Minecraft.
 
 ![bot_fishing.png](README.assets/bot_fishing.png)
 
@@ -30,7 +30,7 @@ Just run `main.py` and have it running in the background.
 
 Subtitles need to be turned on for it to work.
 
-It dosent work in full screen.
+It does not work in full screen.
 
 Set keyboard focus on the computer vision window and press "q" to quit.
 
