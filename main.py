@@ -62,11 +62,12 @@ def capture_window(window_handle):
     data_bit_map = win32ui.CreateBitmap()
     data_bit_map.CreateCompatibleBitmap(device_context_object, width, height)
     create_device_context.SelectObject(data_bit_map)
-    create_device_context.BitBlt((0, 0),
-                                 (width, height),
-                                 device_context_object,
-                                 (cropped_x, cropped_y),
-                                 win32con.SRCCOPY)
+    create_device_context.BitBlt(
+        (0, 0),
+        (width, height),
+        device_context_object,
+        (cropped_x, cropped_y),
+        win32con.SRCCOPY)
 
     image = numpy.frombuffer(data_bit_map.GetBitmapBits(True), dtype="uint8")
     image.shape = (height, width, 4)
@@ -95,11 +96,12 @@ def main():
             get_window_handles()[0]), cv2.COLOR_BGR2GRAY)
         screenshot = capture_window(get_window_handles()[0])
         screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
-        text = pytesseract.image_to_string(cv2.threshold(screenshot,
-                                                         0,
-                                                         255,
-                                                         cv2.THRESH_BINARY
-                                                         + cv2.THRESH_OTSU)[1])
+        text = pytesseract.image_to_string(cv2.threshold(
+            screenshot,
+            0,
+            255,
+            cv2.THRESH_BINARY
+            + cv2.THRESH_OTSU)[1])
 
         if phrase in text.lower():
             print("fish on")
