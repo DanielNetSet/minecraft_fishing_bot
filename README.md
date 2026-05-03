@@ -37,3 +37,5 @@ Set keyboard focus on the computer vision window and press "q" to quit.
 It messes up when multiple people are fishing in the same spot because it reads other subtitles.
 
 Make sure you don't have Minecraft minimised when you start the script.
+
+![Alt](https://repobeats.axiom.co/api/embed/548f286805e66ea0a50fd627ae77ecace409087a.svg "Repobeats analytics image")
